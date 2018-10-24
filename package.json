@@ -1,29 +1,34 @@
 {
   "name": "meteor-docker",
-  "version": "0.1.0",
+  "version": "0.0.0-development",
   "description": "",
   "scripts": {
     "pretest": "npm run lint",
     "test": "cd tests && bash test.sh",
     "lint": "eslint **/*.js",
     "eslint": "eslint",
-    "release": "bash ./tests/prepare-release.sh"
+    "release": "bash ./tests/prepare-release.sh",
+    "semantic-release": "semantic-release",
+    "travis-deploy-once": "travis-deploy-once"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/zodern/meteor-docker.git"
+    "url": "https://github.com/hubroedu/meteor-docker.git"
   },
-  "author": "zodern",
+  "author": "jorgeer",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/zodern/meteor-docker/issues"
+    "url": "https://github.com/jorgeer/meteor-docker/issues"
   },
-  "homepage": "https://github.com/zodern/meteor-docker#readme",
+  "homepage": "https://github.com/hubroedu/meteor-docker#readme",
   "private": true,
   "dependencies": {
     "@semantic-release/exec": "^2.0.0",
-    "@semantic-release/git": "^2.2.0",
+    "@semantic-release/git": "^2.2.0"
+  },
+  "devDependencies": {
     "eslint": "^4.15.0",
-    "semantic-release": "^12.4.1"
+    "travis-deploy-once": "^5.0.9",
+    "semantic-release": "^15.10.5"
   }
 }

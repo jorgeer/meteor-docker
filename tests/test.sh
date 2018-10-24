@@ -1,6 +1,6 @@
 set -e
-docker build -t zodern/meteor ../image
-docker build -t zodern/meteor:root ../root-image
+docker build -t jorgeer/meteor ../image
+docker build -t jorgeer/meteor:root ../root-image
 
 command -v meteor >/dev/null 2>&1 || { curl https://install.meteor.com/ | sh; }
 
@@ -84,12 +84,12 @@ FROM $DOCKER_IMAGE
 COPY ./bundle.tar.gz /bundle/bundle.tar.gz
 EOT
 
-  hide_output docker build --build-arg NODE_VERSION="$NODE_VERSION" -t zodern/meteor-test .
+  hide_output docker build --build-arg NODE_VERSION="$NODE_VERSION" -t jorgeer/meteor-test .
   docker run --name meteor-docker-test \
   -e "ROOT_URL=http://app.com" \
   -p 3000:3000 \
   -d \
-  zodern/meteor-test
+  jorgeer/meteor-test
 
   cd ../app
 }
@@ -107,12 +107,12 @@ COPY --chown=app:app . /built_app
 RUN cd /built_app/programs/server && npm install $NPM_OPTIONS
 EOT
 
-  hide_output docker build --build-arg NODE_VERSION="$NODE_VERSION" -t zodern/meteor-test .
+  hide_output docker build --build-arg NODE_VERSION="$NODE_VERSION" -t jorgeer/meteor-test .
   docker run --name meteor-docker-test \
   -e "ROOT_URL=http://app.com" \
   -p 3000:3000 \
   -d \
-  zodern/meteor-test
+  jorgeer/meteor-test
 
   cd ../../app
 }
@@ -161,21 +161,21 @@ test_version() {
 test_versions() {
   echo "--- Testing Docker Image $DOCKER_IMAGE ---"
 
-  test_version "--release=1.2.1"
-  test_version "--release=1.3.5.1"
+  # test_version "--release=1.2.1"
+  # test_version "--release=1.3.5.1"
   # test_version "--release=1.4"
   # test_version "--release=1.4.4.5"
-  test_version "--release=1.5.4.1"
-  test_version "--release=1.6"
+  # test_version "--release=1.5.4.1"
+  # test_version "--release=1.6"
 
   # Latest version
   test_version
 }
 
-DOCKER_IMAGE="zodern/meteor"
+DOCKER_IMAGE="jorgeer/meteor"
 NPM_OPTIONS=""
 test_versions
 
-DOCKER_IMAGE="zodern/meteor:root"
+DOCKER_IMAGE="jorgeer/meteor:root"
 NPM_OPTIONS="--unsafe-perm"
 test_versions

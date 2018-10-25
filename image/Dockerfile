@@ -1,5 +1,6 @@
 FROM debian:stretch-slim
 LABEL maintainer="jorgeer"
+
 RUN apt-get update && \
   apt-get install -y curl python make g++ bzip2 ca-certificates --no-install-recommends && \
   rm -rf /var/lib/apt/lists/*
